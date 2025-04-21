@@ -13,7 +13,10 @@ MIN_SCAN_INTERVAL = 10  # seconds
 MAX_SCAN_INTERVAL = 600  # seconds
 
 # Renogy BT-1 and BT-2 module identifiers - devices advertise with these prefixes
-RENOGY_BT_PREFIX = "BT-TH-"
+#RENOGY_BT_PREFIX = "BT-TH-"
+
+# Renogy smart shunt identifier identify with this prefix
+RENOGY_BT_PREFIX = "RTMShunt"
 
 # Configuration parameters
 CONF_SCAN_INTERVAL = "scan_interval"
