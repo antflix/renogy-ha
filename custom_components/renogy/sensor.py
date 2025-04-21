@@ -36,6 +36,7 @@ from .const import (
     DOMAIN,
     LOGGER,
     RENOGY_BT_PREFIX,
+    DeviceType,
 )
 
 # Registry of sensor keys
@@ -339,13 +340,17 @@ def create_entities_helper(
     """Create sensor entities with provided coordinator and optional device."""
     entities = []
 
-    # Group sensors by category
-    for category_name, sensor_list in {
-        "Battery": BATTERY_SENSORS,
-        "PV": PV_SENSORS,
-        "Load": LOAD_SENSORS,
-        "Controller": CONTROLLER_SENSORS,
-    }.items():
+    # Group sensors by category based on device_type
+    if device_type == DeviceType.SHUNT.value:
+        sensor_groups = {"Shunt": SHUNT_SENSORS}
+    else:
+        sensor_groups = {
+            "Battery": BATTERY_SENSORS,
+            "PV": PV_SENSORS,
+            "Load": LOAD_SENSORS,
+            "Controller": CONTROLLER_SENSORS,
+        }
+    for category_name, sensor_list in sensor_groups.items():
         for description in sensor_list:
             sensor = RenogyBLESensor(
                 coordinator, device, description, category_name, device_type
