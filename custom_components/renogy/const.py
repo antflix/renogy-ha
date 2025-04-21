@@ -31,14 +31,14 @@ class DeviceType(Enum):
     CONTROLLER = "controller"
     BATTERY = "battery"
     INVERTER = "inverter"
-
+    SHUNT = "shunt"
 
 # List of supported device types
 DEVICE_TYPES = [e.value for e in DeviceType]
 DEFAULT_DEVICE_TYPE = DeviceType.CONTROLLER.value
 
 # List of fully supported device types (currently only controller)
-SUPPORTED_DEVICE_TYPES = [DeviceType.CONTROLLER.value]
+SUPPORTED_DEVICE_TYPES = [DeviceType.CONTROLLER.value, DeviceType.SHUNT.value]
 
 # BLE Characteristics and Service UUIDs
 RENOGY_READ_CHAR_UUID = (
@@ -64,5 +64,8 @@ COMMANDS = {
         "device_id": (3, 26, 1),
         "battery": (3, 57348, 1),
         "pv": (3, 256, 34),
+    },
+        DeviceType.SHUNT.value: {
+        "shunt_info": (3, 256, 110),
     },
 }
